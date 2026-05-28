@@ -36,6 +36,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
     { id: 'services', label: 'Our Services' },
     { id: 'property', label: 'Property' },
     { id: 'projects', label: 'Projects' },
+    { id: 'blogs', label: 'Blogs' },   
     { id: 'more', label: 'Contact US' }
   ];
 

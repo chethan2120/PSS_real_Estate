@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { Building2, Mail, Phone, MapPin, Compass, Shield, Clock } from 'lucide-react';
+import { Building2, Mail, Phone, MapPin, Compass, Shield, Clock, Newspaper } from 'lucide-react';
 import { COMPANY_INFO } from '../data';
 
 const UKFlag = () => (
@@ -210,6 +210,12 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               <li>
                 <button onClick={() => handleNav('projects')} className="hover:text-white transition-colors duration-200">
                   🏗️ Active Projects
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handleNav('blogs')} className="hover:text-white transition-colors duration-200 flex items-center gap-1.5">
+                  <Newspaper className="h-3 w-3" />
+                  📝 Blogs & Insights
                 </button>
               </li>
             </ul>

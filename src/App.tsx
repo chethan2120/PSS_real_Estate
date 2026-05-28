@@ -11,6 +11,7 @@ import BookingFormModal from './components/BookingFormModal';
 import PropertyDetail from './components/PropertyDetail';
 import ProjectDetail from './components/ProjectDetail';
 
+
 // Views
 import HomeView from './views/HomeView';
 import ProfileView from './views/ProfileView';
@@ -18,6 +19,7 @@ import ServicesView from './views/ServicesView';
 import PropertyView from './views/PropertyView';
 import ProjectsView from './views/ProjectsView';
 import MoreView from './views/MoreView';
+import BlogView from './views/BlogView';
 
 // Data
 import { COMPANY_INFO, PROPERTIES, PROJECTS } from './data';
@@ -170,7 +172,7 @@ export default function App() {
             {currentPage === 'property' && (
               <PropertyView onOpenBooking={handleOpenBooking} />
             )}
-            
+            {currentPage === 'blogs' && <BlogView />}
             {currentPage === 'projects' && (
               <ProjectsView onOpenBooking={() => handleOpenBooking()} />
             )}
