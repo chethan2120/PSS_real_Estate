@@ -19,7 +19,7 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
   // Use PROPERTIES directly
   const propertiesArray = PROPERTIES || [];
 
-  // Extract city from location field (since city field might not exist)
+  // Extract city from location field
   const getCityFromProperty = (property: any) => {
     if (property.city) return property.city;
     const location = property.location || '';
@@ -34,13 +34,11 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
 
   // Filter properties by city and search query
   const filteredProperties = propertiesArray.filter(property => {
-    // City filter
     if (selectedCity !== 'All') {
       const propertyCity = getCityFromProperty(property);
       if (propertyCity !== selectedCity) return false;
     }
     
-    // Search filter - search in title, location, and description
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase();
       const titleMatch = property.title?.toLowerCase().includes(searchLower);
@@ -60,7 +58,6 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
     Gurgaon: propertiesArray.filter(p => getCityFromProperty(p) === 'Gurgaon').length,
   };
 
-  // Get total count for display
   const getCount = (city: string) => {
     if (city === 'Delhi') return cityCounts.Delhi;
     if (city === 'Saharanpur') return cityCounts.Saharanpur;
@@ -72,33 +69,37 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
   return (
     <div className="space-y-12 pb-16">
       
-      {/* Hero Section */}
-      <section className="relative h-[350px] md:h-[400px] w-full overflow-hidden">
+      {/* Hero Section - NO SCROLL INDICATOR */}
+      <section className="relative h-[500px] md:h-[600px] lg:h-[650px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1920&q=80"
+            src="https://images.pexels.com/photos/443383/pexels-photo-443383.jpeg?auto=compress&cs=tinysrgb&w=1920&h=1080&dpr=2"
             alt="Property Portfolio"
             className="h-full w-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/85 to-black/70" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/50" />
         </div>
         
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
           <div className="max-w-3xl">
-            <div className="flex items-center gap-2 text-white/70 text-sm mb-4">
+            <div className="flex items-center gap-2 text-white/60 text-sm mb-4">
               <span>Home</span>
               <ArrowRight className="h-3 w-3" />
               <span className="text-[#F17300]">Property Portfolio</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white tracking-tight leading-tight mb-4">
               Property Portfolio
             </h1>
-            <p className="text-base text-gray-200 leading-relaxed max-w-2xl">
+            <p className="text-base sm:text-lg text-gray-300 leading-relaxed max-w-2xl">
               The page lists hot properties from the various city. These properties are exclusively made 
               available for our valuable clients. So choose the one that suits your requirement, and let us serve you once.
             </p>
           </div>
         </div>
+        
+        {/* SCROLL INDICATOR REMOVED - DELETED */}
+        
       </section>
 
       {/* City Stats Strip */}
@@ -106,7 +107,6 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
         <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             
-            {/* Delhi Button */}
             <button
               onClick={() => setSelectedCity(selectedCity === 'Delhi' ? 'All' : 'Delhi')}
               className={`text-center p-4 rounded-xl transition-all cursor-pointer ${
@@ -129,7 +129,6 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
               </p>
             </button>
 
-            {/* Saharanpur Button */}
             <button
               onClick={() => setSelectedCity(selectedCity === 'Saharanpur' ? 'All' : 'Saharanpur')}
               className={`text-center p-4 rounded-xl transition-all cursor-pointer ${
@@ -152,7 +151,6 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
               </p>
             </button>
 
-            {/* Ghaziabad Button */}
             <button
               onClick={() => setSelectedCity(selectedCity === 'Ghaziabad' ? 'All' : 'Ghaziabad')}
               className={`text-center p-4 rounded-xl transition-all cursor-pointer ${
@@ -175,7 +173,6 @@ export default function PropertyView({ onOpenBooking }: PropertyViewProps) {
               </p>
             </button>
 
-            {/* Gurgaon Button */}
             <button
               onClick={() => setSelectedCity(selectedCity === 'Gurgaon' ? 'All' : 'Gurgaon')}
               className={`text-center p-4 rounded-xl transition-all cursor-pointer ${

@@ -250,19 +250,19 @@ export default function ServicesView() {
 
   const getIcon = (name: string) => {
     switch (name) {
-      case 'Home': return <HomeIcon className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'Search': return <Search className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'Briefcase': return <Briefcase className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'Building': return <Building className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'Crown': return <Crown className="h-5 w-5 md:h-6 md:w-6 text-[#D4AF37]" />;
-      case 'TrendingUp': return <TrendingUp className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'FileText': return <FileText className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      case 'DollarSign': return <DollarSign className="h-5 w-5 md:h-6 md:w-6 text-emerald-600" />;
-      case 'Globe': return <Globe className="h-5 w-5 md:h-6 md:w-6 text-sky-600" />;
-      case 'BarChart3': return <BarChart3 className="h-5 w-5 md:h-6 md:w-6 text-purple-600" />;
-      case 'Percent': return <Percent className="h-5 w-5 md:h-6 md:w-6 text-orange-600" />;
-      case 'Users': return <Users className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
-      default: return <HomeIcon className="h-5 w-5 md:h-6 md:w-6 text-indigo-600" />;
+      case 'Home': return <HomeIcon className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Search': return <Search className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Briefcase': return <Briefcase className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Building': return <Building className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Crown': return <Crown className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'TrendingUp': return <TrendingUp className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'FileText': return <FileText className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'DollarSign': return <DollarSign className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Globe': return <Globe className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'BarChart3': return <BarChart3 className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Percent': return <Percent className="h-5 w-5 md:h-6 md:w-6" />;
+      case 'Users': return <Users className="h-5 w-5 md:h-6 md:w-6" />;
+      default: return <HomeIcon className="h-5 w-5 md:h-6 md:w-6" />;
     }
   };
 
@@ -276,14 +276,11 @@ export default function ServicesView() {
   const handleSubmitEnquiry = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Construct dynamic message
     const waText = `*PSS Real Estate - Service Enquiry* %0A%0A*Name:* ${encodeURIComponent(customerName || 'Interested Customer')}%0A*Phone:* ${encodeURIComponent(customerPhone || 'Not Provided')}%0A*Service:* ${encodeURIComponent(modalService)}%0A%0A*Message:* ${encodeURIComponent(customerMessage)}`;
     
-    // Smooth submit
     setSubmitSuccess(true);
     setTimeout(() => {
       window.open(`https://wa.me/${COMPANY_INFO.contact.whatsapp}?text=${waText}`, '_blank');
-      // Reset
       setIsModalOpen(false);
       setCustomerName('');
       setCustomerPhone('');
@@ -295,15 +292,14 @@ export default function ServicesView() {
   return (
     <div className="space-y-12 pb-16 font-sans bg-gray-50/50">
       
-      {/* Banner portion */}
-      <section className="relative h-64 sm:h-72 w-full overflow-hidden bg-gray-900 border-b border-gray-100">
+      {/* Banner portion - LARGER HERO SECTION */}
+      <section className="relative h-[500px] md:h-[600px] lg:h-[650px] w-full overflow-hidden bg-gray-900 border-b border-gray-100">
         <img
           src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1920&q=80"
           alt="Premium Real Estate Consulting Background"
           referrerPolicy="no-referrer"
           className="absolute inset-0 h-full w-full object-cover object-center opacity-75"
         />
-        {/* Soft elegant gradient layers */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/70 to-transparent" />
         
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
@@ -321,7 +317,7 @@ export default function ServicesView() {
         </div>
       </section>
 
-      {/* Mode Switcher for Perfect Device Optimization */}
+      {/* Mode Switcher */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 bg-white p-3 rounded-2xl border border-gray-100 shadow-sm">
           <div className="text-center sm:text-left">
@@ -357,10 +353,9 @@ export default function ServicesView() {
       <section id="service-detail-section" className="relative scroll-mt-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {viewMode === 'tabs' ? (
-          /* TABBED INTERACTIVE VIEW with Gorgeous Side-by-Side Dual Pane */
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             
-            {/* LEFT COLUMN: Highly scan-optimized vertical service selectors */}
+            {/* LEFT COLUMN */}
             <div className="lg:col-span-4 space-y-4">
               <div className="p-1">
                 <p className="text-[10px] font-black text-indigo-700 uppercase tracking-widest font-mono">
@@ -371,7 +366,7 @@ export default function ServicesView() {
                 </h2>
               </div>
               
-              {/* Mobile Selective Scroll Ribbon (Frictionless Touch Navigation) */}
+              {/* Mobile Scroll */}
               <div className="block lg:hidden w-full overflow-x-auto pb-2 -mx-1 flex gap-2 scrollbar-none snap-x">
                 {SERVICES.map((s, idx) => (
                   <button
@@ -392,7 +387,7 @@ export default function ServicesView() {
                 ))}
               </div>
 
-              {/* Desktop Stack Button list - Elegant sticky column */}
+              {/* Desktop Stack Button list - ICON HIGHLIGHTS ON HOVER */}
               <div className="hidden lg:block space-y-3 sticky top-24 max-h-[75vh] overflow-y-auto pr-2 scrollbar-thin">
                 {SERVICES.map((serv, index) => (
                   <button
@@ -404,13 +399,15 @@ export default function ServicesView() {
                         : 'border-slate-100 bg-white hover:bg-slate-50/60 hover:border-[#F17300]/40 text-slate-600'
                     }`}
                   >
-                    {/* Visual selection left accent bar */}
                     {activeTabIdx === index && (
                       <div className="absolute left-0 top-0 bottom-0 w-1.5 bg-indigo-600" />
                     )}
 
-                    <div className={`p-2.5 rounded-xl shrink-0 transition-transform group-hover:scale-110 ${
-                      activeTabIdx === index ? 'bg-indigo-600 text-white' : 'bg-slate-50 text-slate-400 group-hover:text-indigo-600'
+                    {/* ICON - Highlights on hover with orange background */}
+                    <div className={`p-2.5 rounded-xl shrink-0 transition-all duration-300 ${
+                      activeTabIdx === index 
+                        ? 'bg-indigo-600 text-white' 
+                        : 'bg-slate-50 text-slate-400 group-hover:bg-[#F17300] group-hover:text-white group-hover:scale-110'
                     }`}>
                       {getIcon(serv.iconName)}
                     </div>
@@ -430,10 +427,9 @@ export default function ServicesView() {
               </div>
             </div>
 
-            {/* RIGHT COLUMN: Active Advisory Details formatted exactly like the high fidelity mockup */}
+            {/* RIGHT COLUMN */}
             <div id="active-pane-detail-card" className="lg:col-span-8 space-y-8">
               
-              {/* STAGE 1: MAGNIFICENT BANNER BLOCK WITH PHOTO BACKDROP & OVERLAYS */}
               <div 
                 className="relative overflow-hidden rounded-3.5xl text-white shadow-xl min-h-[300px] border border-[#0D233A]"
                 style={{
@@ -442,57 +438,37 @@ export default function ServicesView() {
                   backgroundPosition: 'center',
                 }}
               >
-                {/* Thick dark royal overlay to maximize text clear readability */}
                 <div className="absolute inset-0 bg-[#0a1c2e]/90 backdrop-blur-[1px]" />
                 
-                {/* Inside details wrapper */}
                 <div className="relative z-10 p-6 sm:p-10 flex flex-col justify-between h-full min-h-[300px] gap-8">
                   
-                  {/* Internal Grid splitting summary text and parameter stats */}
                   <div className="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start w-full">
                     
-                    {/* Left detailed narrative column */}
                     <div className="xl:col-span-8 space-y-4">
-                      {/* Interactive Badge */}
                       <span className="inline-block px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-black font-mono tracking-widest text-amber-400 bg-amber-400/10 border border-amber-400/40 uppercase">
                         {SERVICE_DETAILS_MAP[activeTabIdx].badge}
                       </span>
-                      
-                      {/* Active Heading Title */}
                       <h2 className="text-xl sm:text-3.5xl md:text-4xl font-black font-sans tracking-tight text-white leading-tight">
                         {SERVICE_DETAILS_MAP[activeTabIdx].headline}
                       </h2>
-                      
-                      {/* Slogan subtext */}
                       <p className="text-xs sm:text-base font-bold text-amber-300 leading-snug font-sans max-w-2xl">
                         {SERVICE_DETAILS_MAP[activeTabIdx].tagline}
                       </p>
-
-                      {/* Description */}
                       <p className="text-[11px] sm:text-xs text-slate-300 leading-relaxed font-semibold max-w-xl">
                         {SERVICE_DETAILS_MAP[activeTabIdx].longerText}
                       </p>
-
-                      {/* Dynamic highlight check pill badges for easy list scanning */}
                       <div className="flex flex-wrap gap-2 pt-2">
                         {SERVICE_DETAILS_MAP[activeTabIdx].pills.map((pill, pIdx) => (
-                          <span 
-                            key={pIdx} 
-                            className="text-[10px] font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full shadow"
-                          >
+                          <span key={pIdx} className="text-[10px] font-bold text-white bg-white/10 border border-white/20 px-3 py-1 rounded-full shadow">
                             ✓ {pill}
                           </span>
                         ))}
                       </div>
                     </div>
 
-                    {/* Right stacked statistics indicators card exactly mimicking the mockup */}
                     <div className="xl:col-span-4 flex flex-col gap-3.5 w-full">
                       {SERVICE_DETAILS_MAP[activeTabIdx].stats.map((item, idStat) => (
-                        <div 
-                          key={idStat} 
-                          className="bg-white/5 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex flex-col justify-between transition-all hover:bg-white/10"
-                        >
+                        <div key={idStat} className="bg-white/5 backdrop-blur-md border border-white/15 rounded-2xl p-4 flex flex-col justify-between transition-all hover:bg-white/10">
                           <span className="text-[9px] font-black tracking-wider text-slate-300 uppercase font-mono">
                             {item.label}
                           </span>
@@ -505,7 +481,6 @@ export default function ServicesView() {
 
                   </div>
 
-                  {/* Primary & secondary action triggers at bottom row */}
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-4 border-t border-white/10 mt-auto">
                     <button
                       onClick={() => handleOpenEnquiry(SERVICE_DETAILS_MAP[activeTabIdx].headline)}
@@ -527,10 +502,8 @@ export default function ServicesView() {
                 </div>
               </div>
 
-              {/* STAGE 2: PROCESS TIMELINE AND TRUST SIGNALS UNDERGRID */}
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
                 
-                {/* TIMELINE LOOP (7 COLS OF 12) */}
                 <div className="md:col-span-7 bg-[#FAF7F5] rounded-3xl p-6 sm:p-8 border border-amber-100/30 shadow-md flex flex-col justify-between">
                   <div className="space-y-1">
                     <span className="text-[10px] font-black tracking-widest text-amber-700 uppercase font-mono">
@@ -541,13 +514,9 @@ export default function ServicesView() {
                     </h3>
                   </div>
 
-                  {/* Numbered item rows list */}
                   <div className="space-y-3.5 mt-6">
                     {SERVICE_DETAILS_MAP[activeTabIdx].process.map((stepNode) => (
-                      <div 
-                        key={stepNode.id} 
-                        className="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm transition-all hover:translate-x-1"
-                      >
+                      <div key={stepNode.id} className="flex items-center gap-4 bg-white p-4 rounded-xl border border-slate-100 shadow-sm transition-all hover:translate-x-1">
                         <span className="h-8 w-8 rounded-full bg-[#0D233A] text-white flex items-center justify-center font-black text-xs shrink-0 shadow-sm font-mono">
                           {stepNode.id}
                         </span>
@@ -559,13 +528,11 @@ export default function ServicesView() {
                   </div>
                 </div>
 
-                {/* TRUST SIGNALS PANELS (5 COLS OF 12) */}
                 <div className="md:col-span-5 bg-[#0D233A] text-white rounded-3xl p-6 sm:p-8 flex flex-col justify-normal shadow-lg border border-slate-800">
                   <span className="text-[10px] font-black tracking-widest text-[#D4AF37] uppercase font-mono mb-4 block">
                     TRUST SIGNALS
                   </span>
 
-                  {/* Quality list check indicators */}
                   <div className="space-y-3 mb-6">
                     <div className="flex items-center gap-3 p-3 bg-white/5 border border-white/10 rounded-xl">
                       <ShieldCheck className="h-4.5 w-4.5 text-amber-400 shrink-0" />
@@ -581,10 +548,9 @@ export default function ServicesView() {
                     </div>
                   </div>
 
-                  {/* Coordinated Premium Advisory Network block matching screenshot */}
                   <div className="bg-amber-400/[0.04] border border-amber-400/20 rounded-2xl p-4 mt-auto">
                     <div className="flex items-center gap-2 mb-1.5 text-amber-400">
-                      <Zap className="h-3.5 w-3.5 fill-current animate-pulse shrink-0" />
+                      <Zap className="h-3.5 w-3.5 fill-current shrink-0" />
                       <span className="text-[9px] font-black tracking-widest font-mono uppercase">PREMIUM ADVISORY NETWORK</span>
                     </div>
                     <p className="text-[11px] text-slate-300 leading-relaxed font-semibold">
@@ -599,21 +565,16 @@ export default function ServicesView() {
 
           </div>
         ) : (
-          /* SINGLE STACKED VIEW OF ALL TEN PORFOLIOS */
+          /* VIEW ALL SECTIONS STACKED */
           <div className="grid grid-cols-1 gap-12">
             {SERVICES.map((s, index) => (
-              <div 
-                key={s.id} 
-                className="bg-white rounded-3xl border border-gray-100 p-6 sm:p-10 shadow-lg space-y-6"
-              >
-                {/* Horizontal breadcrumb info */}
+              <div key={s.id} className="bg-white rounded-3xl border border-gray-100 p-6 sm:p-10 shadow-lg space-y-6">
                 <div className="py-2.5 px-4 bg-gray-50 border border-gray-100 rounded-lg inline-flex items-center gap-1.5 text-xs font-bold text-gray-400 font-sans">
                   <span className="text-slate-500">Home</span>
                   <ChevronRight className="h-3 w-3 text-gray-300" />
                   <span className="text-[#F17300]">{s.title}</span>
                 </div>
 
-                {/* Main photographic content wrapper in view-all modes */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-2">
                   <div className="lg:col-span-8 space-y-4">
                     <div className="space-y-1">
@@ -629,14 +590,11 @@ export default function ServicesView() {
 
                     <div className="space-y-4 text-xs sm:text-sm text-slate-700 leading-relaxed font-semibold">
                       {s.detailedContent.split('\n\n').map((para, pIdx) => (
-                        <p key={pIdx}>
-                          {para}
-                        </p>
+                        <p key={pIdx}>{para}</p>
                       ))}
                     </div>
                   </div>
 
-                  {/* Thumbnail and stats on side */}
                   <div className="lg:col-span-4 space-y-4 bg-slate-50/50 p-5 rounded-2xl border border-slate-100">
                     <img 
                       src={SERVICE_DETAILS_MAP[index].bgPhoto} 
@@ -645,7 +603,6 @@ export default function ServicesView() {
                       referrerPolicy="no-referrer"
                     />
                     
-                    {/* Compact stats */}
                     <div className="grid grid-cols-2 gap-2">
                       {SERVICE_DETAILS_MAP[index].stats.slice(0, 2).map((st, sId) => (
                         <div key={sId} className="bg-white border border-slate-100 p-2.5 rounded-lg">
@@ -657,7 +614,6 @@ export default function ServicesView() {
                   </div>
                 </div>
 
-                {/* Feature line row */}
                 <div className="flex flex-wrap gap-2.5 pt-4 border-t border-slate-100">
                   {s.features.map((feat, fidx) => (
                     <div key={fidx} className="flex items-center gap-2 p-2 bg-slate-50 rounded-xl text-xs font-bold text-slate-700 border border-slate-100 shadow-tiny">
@@ -667,7 +623,6 @@ export default function ServicesView() {
                   ))}
                 </div>
 
-                {/* Primary Action Button */}
                 <div className="pt-4 flex flex-col sm:flex-row justify-between items-center bg-indigo-950 text-white p-5 rounded-2xl gap-4">
                   <div className="text-left">
                     <p className="text-xs font-extrabold text-[#D4AF37] uppercase tracking-wider font-mono">DIRECT INQUIRY DESK</p>
@@ -711,7 +666,7 @@ export default function ServicesView() {
               </div>
 
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-[#F17300] font-[#1C1C1C] font-bold">
+                <div className="flex items-center gap-2 text-[#F17300] font-bold">
                   <CheckCircle2 className="h-4 w-4 text-[#F17300]" />
                   <span>02. DDA & MCD Compliance</span>
                 </div>
@@ -730,15 +685,10 @@ export default function ServicesView() {
         </div>
       </section>
 
-      {/* REAL-TIME DYNAMIC ENQUIRY FORM MODAL */}
+      {/* Modal */}
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm transition-opacity">
-          
-          <div 
-            onClick={(e) => e.stopPropagation()} 
-            className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh] transition-all scale-100 animate-in fade-in zoom-in-95 duration-200"
-          >
-            {/* Header portion */}
+          <div onClick={(e) => e.stopPropagation()} className="relative w-full max-w-md bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100 flex flex-col max-h-[90vh]">
             <div className="bg-[#1C1C1C] text-white p-5 flex items-center justify-between">
               <div>
                 <h3 className="font-black text-sm tracking-widest text-[#F17300] uppercase">ENQUIRY REGISTRATION DESK</h3>
@@ -747,15 +697,12 @@ export default function ServicesView() {
               <button 
                 onClick={() => setIsModalOpen(false)}
                 className="p-1 px-2.5 rounded bg-white/10 hover:bg-white/20 text-white font-black text-xs transition-colors"
-                title="Close"
               >
                 ✕
               </button>
             </div>
 
-            {/* Modal Body */}
             <div className="p-6 overflow-y-auto space-y-4">
-              
               {submitSuccess ? (
                 <div className="py-6 text-center space-y-3">
                   <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-emerald-100 text-emerald-600">
@@ -763,13 +710,11 @@ export default function ServicesView() {
                   </div>
                   <h4 className="text-sm font-black text-gray-900 uppercase">Enquiry Initialized!</h4>
                   <p className="text-xs text-gray-500 max-w-xs mx-auto">
-                    Connecting you to PSS Real Estate via WhatsApp. Please finalize the submission in the WhatsApp application.
+                    Connecting you to PSS Real Estate via WhatsApp. Please finalize the submission.
                   </p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmitEnquiry} className="space-y-4">
-                  
-                  {/* Name field */}
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Your Full Name</label>
                     <div className="relative">
@@ -782,14 +727,13 @@ export default function ServicesView() {
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
                         placeholder="Raman Sharma"
-                        className="block w-full pl-9 pr-3 py-2.5 sm:py-2 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none text-gray-900 placeholder-gray-400 font-semibold"
+                        className="block w-full pl-9 pr-3 py-2.5 sm:py-2 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none"
                       />
                     </div>
                   </div>
 
-                  {/* Phone field */}
                   <div className="space-y-1.5">
-                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Your Mobile / Contact Number</label>
+                    <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Your Mobile Number</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <Phone className="h-4 w-4 text-gray-400" />
@@ -800,12 +744,11 @@ export default function ServicesView() {
                         value={customerPhone}
                         onChange={(e) => setCustomerPhone(e.target.value)}
                         placeholder="+91 9XXXX XXXXX"
-                        className="block w-full pl-9 pr-3 py-2.5 sm:py-2 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none text-gray-900 placeholder-gray-400 font-semibold"
+                        className="block w-full pl-9 pr-3 py-2.5 sm:py-2 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none"
                       />
                     </div>
                   </div>
 
-                  {/* Message Field */}
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-gray-400 uppercase tracking-wider block">Inquiry Brief</label>
                     <textarea
@@ -813,18 +756,17 @@ export default function ServicesView() {
                       value={customerMessage}
                       onChange={(e) => setCustomerMessage(e.target.value)}
                       placeholder="Specify your target location, budget or query here..."
-                      className="block w-full p-3 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none text-gray-900 placeholder-gray-400 font-semibold"
+                      className="block w-full p-3 text-xs border border-gray-200 rounded-lg bg-gray-50/50 focus:bg-white focus:ring-1 focus:ring-[#F17300] focus:border-[#F17300] outline-none"
                     />
                   </div>
 
-                  {/* Submit Button */}
                   <div className="pt-2 flex flex-col gap-2">
                     <button
                       type="submit"
-                      className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow transition-all duration-150 flex items-center justify-center gap-2 hover:scale-[1.01] active:scale-[0.99]"
+                      className="w-full py-3 bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-xs uppercase tracking-wider rounded-lg shadow transition-all flex items-center justify-center gap-2"
                     >
                       <WhatsAppIcon className="h-4.5 w-4.5" />
-                      <span>Proceed to WhatsApp Submit</span>
+                      <span>Proceed to WhatsApp</span>
                     </button>
                     
                     <button
@@ -835,13 +777,10 @@ export default function ServicesView() {
                       Cancel
                     </button>
                   </div>
-
                 </form>
               )}
-
             </div>
           </div>
-
         </div>
       )}
 

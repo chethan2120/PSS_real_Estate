@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Building2, CalendarRange } from 'lucide-react';
 import { COMPANY_INFO } from '../data';
+import LogoImage from '../assets/images/Logo of PSS.jpeg';
 
 interface HeaderProps {
   currentPage: string;
@@ -67,31 +68,20 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Brand Side */}
+          {/* Logo Image Only - No Text */}
           <div
             onClick={handleLogoClick}
             id="logo-brand-btn"
-            className="flex items-center gap-3 cursor-pointer select-none group"
+            className="flex items-center cursor-pointer select-none group"
           >
-            <div className={`flex items-center justify-center h-10 w-10 rounded-lg transition-all group-hover:scale-105 ${
-              isScrolled ? 'bg-[#F17300]' : 'bg-[#F17300]'
-            } text-white shadow-lg shadow-[#F17300]/20`}>
-              <Building2 className="h-6 w-6" />
-            </div>
-            <div>
-              <h1 className="font-black tracking-tight text-lg sm:text-xl md:text-2xl flex items-center leading-none">
-                <span className={isScrolled ? 'text-[#1C1C1C]' : 'text-white'}>
-                  PSS
-                </span>
-                <span className="font-light ml-1.5 text-sm sm:text-base tracking-widest uppercase text-[#F17300]">
-                  Real Estate
-                </span>
-              </h1>
-              <p className={`text-[9px] font-mono tracking-widest uppercase leading-none mt-0.5 ${
-                isScrolled ? 'text-gray-400' : 'text-white/80'
-              }`}>
-                Pvt. Ltd.
-              </p>
+            <div className={`flex items-center justify-center h-12 w-auto transition-all group-hover:scale-105 overflow-hidden ${
+              isScrolled ? 'bg-transparent' : 'bg-transparent'
+            }`}>
+              <img 
+                src={LogoImage} 
+                alt="PSS Real Estate Logo"
+                className="h-12 w-auto object-contain"
+              />
             </div>
           </div>
 

@@ -6,6 +6,7 @@
 import { useState, useEffect } from 'react';
 import { Building2, Mail, Phone, MapPin, Compass, Shield, Clock, Newspaper } from 'lucide-react';
 import { COMPANY_INFO } from '../data';
+import LogoImage from '../assets/images/Logo of PSS.jpeg';
 
 const UKFlag = () => (
   <svg viewBox="0 0 50 30" strokeLinecap="round" strokeLinejoin="round" className="w-5.5 h-3.5 border border-white/20 shadow-xs inline-block bg-[#012169]">
@@ -83,93 +84,22 @@ export default function Footer({ setCurrentPage }: FooterProps) {
   return (
     <footer id="main-app-footer" className="bg-[#1C1C1C] text-white pt-0 pb-8 border-t border-white/10 relative overflow-hidden">
       
-      {/* TOP LANG & VISITOR BAR */}
-      <div className="bg-[#352920] border-b border-white/10 py-3 sm:py-2.5 px-4 shadow-sm relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          {/* Language + Flags group */}
-          <div className="flex flex-col sm:flex-row items-center gap-3">
-            <div className="flex items-center gap-2">
-              <button 
-                type="button" 
-                onClick={() => setLanguage('en')} 
-                className="hover:scale-110 active:scale-95 transition-all outline-none" 
-                title="English"
-              >
-                <UKFlag />
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setLanguage('fr')} 
-                className="hover:scale-110 active:scale-95 transition-all outline-none" 
-                title="Français"
-              >
-                <FrenchFlag />
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setLanguage('de')} 
-                className="hover:scale-110 active:scale-95 transition-all outline-none" 
-                title="Deutsch"
-              >
-                <GermanFlag />
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setLanguage('hi')} 
-                className="hover:scale-110 active:scale-95 transition-all outline-none" 
-                title="हिन्दी"
-              >
-                <IndiaFlag />
-              </button>
-            </div>
-            
-            <select
-              aria-label="Select Language"
-              value={language}
-              onChange={(e) => setLanguage(e.target.value)}
-              className="bg-[#241a12] text-[#F17300] border border-white/15 text-xs py-1 px-3 rounded-xs focus:outline-none focus:border-[#F17300] font-sans font-semibold cursor-pointer outline-none"
-            >
-              <option value="en">Select Language</option>
-              <option value="fr">Français</option>
-              <option value="de">Deutsch</option>
-              <option value="hi">हिन्दी (India)</option>
-            </select>
-          </div>
-
-          {/* Visitor Counter */}
-          <div className="flex items-center gap-2 select-none">
-            <span className="text-[#EFE6DC] font-serif text-sm italic tracking-wide">
-              Visitor No. :
-            </span>
-            <div className="flex gap-1.5">
-              {visitorCount.split('').map((digit, idx) => (
-                <span 
-                  key={idx} 
-                  className="inline-flex items-center justify-center w-5.5 h-6 bg-[#16100B] border border-white/20 text-white font-mono text-xs sm:text-sm font-bold rounded-xs shadow-inner"
-                >
-                  {digit}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
       {/* Visual Ambient Element */}
       <div className="h-1 bg-gradient-to-r from-[#F17300] via-orange-500 to-[#1C1C1C]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* Col 1 Brand Statement */}
+          {/* Col 1 - Logo Image instead of text */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="flex items-center justify-center h-8 w-8 rounded bg-[#F17300] text-white">
-                <Building2 className="h-5 w-5" />
+              <div className="flex items-center justify-center h-12 w-auto overflow-hidden">
+                <img 
+                  src={LogoImage} 
+                  alt="PSS Real Estate Logo"
+                  className="h-12 w-auto object-contain"
+                />
               </div>
-              <span className="text-lg font-black tracking-tight uppercase">
-                PSS<span className="text-[#F17300] font-light"> Real Estate</span>
-              </span>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed font-sans">
               PSS REAL ESTATE PVT. LTD. represents the gold standard of real estate transaction execution and legal title diligence across North Delhi, Rohini, Gurgaon, and Faridabad.
@@ -189,33 +119,33 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <ul className="space-y-2.5 text-xs text-gray-400">
               <li>
                 <button onClick={() => handleNav('home')} className="hover:text-white transition-colors duration-200">
-                  🏠 Home Portfolio
+                  Home Portfolio
                 </button>
               </li>
               <li>
                 <button onClick={() => handleNav('profile')} className="hover:text-white transition-colors duration-200">
-                  📊 Corporate Profile
+                  Corporate Profile
                 </button>
               </li>
               <li>
                 <button onClick={() => handleNav('services')} className="hover:text-white transition-colors duration-200">
-                  🛠️ Services Portfolio
+                  Services Portfolio
                 </button>
               </li>
               <li>
                 <button onClick={() => handleNav('property')} className="hover:text-white transition-colors duration-200">
-                  🏢 Showcase Properties
+                  Showcase Properties
                 </button>
               </li>
               <li>
                 <button onClick={() => handleNav('projects')} className="hover:text-white transition-colors duration-200">
-                  🏗️ Active Projects
+                  Active Projects
                 </button>
               </li>
               <li>
                 <button onClick={() => handleNav('blogs')} className="hover:text-white transition-colors duration-200 flex items-center gap-1.5">
-                  <Newspaper className="h-3 w-3" />
-                  📝 Blogs & Insights
+                 
+                  Blogs & Insights
                 </button>
               </li>
             </ul>
@@ -276,7 +206,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             <span>© {currentYear} {COMPANY_INFO.name}. All legal rights reserved.</span>
           </div>
           
-          {/* Requested Attibution: Designed and Maintained by WebNxt (make only webnxt word clickable https://webnxt.co/) */}
+          {/* Requested Attibution: Designed and Maintained by WebNxt */}
           <div id="attribution-footer-block" className="flex items-center text-[11px] font-medium tracking-wide">
             <span>Designed and Maintained by&nbsp;</span>
             <a 
