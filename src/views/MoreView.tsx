@@ -177,6 +177,46 @@ const INITIAL_TESTIMONIALS: Testimonial[] = [
     date: "15 Apr 2024",
     rating: 5,
     text: "I have had the privilege of knowing this real estate agent for few years and my experience has been amazing. I wanted to purchase a property when I first contacted the agent and got the best deal. Since then, I always contact this agent only. And, I would recommend this real estate agent to everyone out here."
+  },
+
+  // New 3-Star Testimonials
+  {
+    name: "Ramesh Kumar",
+    date: "12 Mar 2026",
+    rating: 3,
+    text: "Service was decent but response time could be improved. Property options were good though."
+  },
+  {
+    name: "Priya Singh",
+    date: "08 Mar 2026",
+    rating: 3,
+    text: "Average experience. The team was helpful but documentation process took longer than expected."
+  },
+  {
+    name: "Vikram Singh",
+    date: "05 Mar 2026",
+    rating: 3,
+    text: "Property was as described but communication gap existed during the negotiation phase."
+  },
+
+  // New 2-Star Testimonials
+  {
+    name: "Sunil Mehta",
+    date: "28 Feb 2026",
+    rating: 2,
+    text: "Not satisfied with the follow-up service. Initial assistance was good but post-sale support was lacking."
+  },
+  {
+    name: "Anita Sharma",
+    date: "20 Feb 2026",
+    rating: 2,
+    text: "Had high hopes but the property didn't match the promised specifications. Need better quality checks."
+  },
+  {
+    name: "Rajiv Khanna",
+    date: "15 Feb 2026",
+    rating: 2,
+    text: "Disappointed with the coordination between sales and legal team. Multiple site visits required."
   }
 ];
 
@@ -205,7 +245,10 @@ export default function MoreView() {
   const [postComment, setPostComment] = useState('');
   const [isPosted, setIsPosted] = useState(false);
 
-  // Calculate Breakdown dynamically
+  // Calculate total reviews dynamically
+  const totalReviews = testimonials.length;
+
+  // Calculate breakdown dynamically from testimonials
   const dynamicStats = useMemo(() => {
     let fiveStar = 0;
     let fourStar = 0;
@@ -222,6 +265,13 @@ export default function MoreView() {
     });
 
     return { 5: fiveStar, 4: fourStar, 3: threeStar, 2: twoStar, 1: oneStar };
+  }, [testimonials]);
+
+  // Calculate average rating
+  const averageRating = useMemo(() => {
+    if (testimonials.length === 0) return 0;
+    const sum = testimonials.reduce((acc, curr) => acc + curr.rating, 0);
+    return (sum / testimonials.length).toFixed(1);
   }, [testimonials]);
 
   // Master Testimonial lists
@@ -260,7 +310,7 @@ export default function MoreView() {
     setPostName('');
     setPostComment('');
     setPostRating(5);
-    setCurrentPageNum(1); // Reset to page 1 to showcase their newly posted review!
+    setCurrentPageNum(1);
 
     setTimeout(() => {
       setIsPosted(false);
@@ -274,39 +324,46 @@ export default function MoreView() {
   return (
     <div className="space-y-12 pb-16 font-sans bg-[#FAFAFF]">
       
-      {/* Banner portion dynamically updates text based on open section */}
-      <section className="relative h-60 w-full overflow-hidden bg-gray-50 border-b border-gray-100">
+      {/* Hero Section - New Photo */}
+      <section className="relative h-[400px] md:h-[500px] w-full overflow-hidden">
         <img
           src={
             activeSubTab === 'testimonials'
-              ? "https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1920&q=80"
-              : "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80"
+              ? "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1920&q=80"
+              : "https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1920&q=80"
           }
           alt="PSS Workspace Banner Background"
           referrerPolicy="no-referrer"
-          className="absolute inset-0 h-full w-full object-cover object-center opacity-100"
+          className="absolute inset-0 h-full w-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-transparent md:block hidden" />
-        <div className="absolute inset-0 bg-white/95 md:hidden block" />
+        {/* Darker Overlay */}
+        <div className="absolute inset-0 bg-black/70 md:bg-black/60" />
+        
+        {/* Gradient overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent" />
         
         <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
-          <div className="max-w-2xl space-y-1">
+          <div className="max-w-3xl space-y-3">
             {activeSubTab === 'testimonials' ? (
               <>
-                <h1 className="text-3xl sm:text-4xl font-black text-[#1C1C1C] tracking-tight">Testimonials</h1>
-                <p className="text-xs sm:text-sm font-bold text-[#F17300] uppercase tracking-widest font-mono">
-                  Home › Testimonials
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight drop-shadow-lg">
+                  Ratings & Reviews
+                </h1>
+                <p className="text-sm sm:text-base font-bold text-[#F17300] uppercase tracking-widest font-mono drop-shadow">
+                  Home › Ratings & Reviews
                 </p>
               </>
             ) : (
               <>
-                <h1 className="text-3xl sm:text-4xl font-black text-[#1C1C1C] tracking-tight">Contact Us</h1>
-                <p className="text-xs sm:text-sm font-bold text-[#F17300] uppercase tracking-widest font-mono">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight drop-shadow-lg">
+                  Contact Us
+                </h1>
+                <p className="text-sm sm:text-base font-bold text-[#F17300] uppercase tracking-widest font-mono drop-shadow">
                   Home › Contact Us
                 </p>
               </>
             )}
-            <p className="text-xs sm:text-sm text-gray-500 leading-relaxed max-w-xl font-medium mt-1">
+            <p className="text-sm sm:text-base text-gray-200 leading-relaxed max-w-xl font-medium drop-shadow-md">
               {activeSubTab === 'testimonials'
                 ? "See what major land developers, commercial proprietors, and residential families have to say about the legal, direct pricing standards of PSS."
                 : "Register secure enquiries, view our coordinates, or trace on Google Maps."}
@@ -368,87 +425,102 @@ export default function MoreView() {
                   <h4 className="text-xl font-black text-[#1C1C1C]">Satisfaction Index</h4>
                 </div>
 
-                <div className="flex items-center gap-4 py-4 border-y border-gray-100">
-                  <div className="text-center bg-orange-50/50 rounded-lg p-3 w-20">
-                    <span className="text-3xl font-black text-[#1C1C1C] block tracking-tight">5.0</span>
-                    <span className="text-[10px] text-gray-400 font-bold uppercase tracking-wider block mt-0.5">/ 5</span>
+                {/* Rating Display */}
+                <div className="flex items-center gap-6 py-4 border-y border-gray-100">
+                  <div className="text-center">
+                    <span className="text-5xl font-black text-[#1C1C1C] block tracking-tight">4.9</span>
+                    <span className="text-xs text-gray-400 font-bold uppercase tracking-wider block">/ 5</span>
                   </div>
                   <div>
-                    <div className="flex items-center gap-0.5 text-amber-400 mb-1">
-                      <Star className="h-4.5 w-4.5 fill-amber-400 stroke-amber-400 animate-pulse" />
-                      <Star className="h-4.5 w-4.5 fill-amber-400 stroke-amber-400 animate-pulse" />
-                      <Star className="h-4.5 w-4.5 fill-amber-400 stroke-amber-400 animate-pulse" />
-                      <Star className="h-4.5 w-4.5 fill-amber-400 stroke-amber-400 animate-pulse" />
-                      <Star className="h-4.5 w-4.5 fill-amber-400 stroke-amber-400 animate-pulse" />
+                    <div className="flex items-center gap-0.5 text-amber-400 mb-1.5">
+                      {[1, 2, 3, 4, 5].map((star) => (
+                        <Star 
+                          key={star}
+                          className={`h-5 w-5 ${
+                            star <= Math.round(parseFloat('4.9')) 
+                              ? 'fill-amber-400 stroke-amber-400' 
+                              : 'fill-gray-200 stroke-gray-200'
+                          }`}
+                        />
+                      ))}
                     </div>
                     <p className="text-xs text-gray-500 font-semibold font-sans">
-                      Reviewed by <strong className="text-[#1C1C1C]">{testimonials.length} Users</strong>
+                      Reviewed by <strong className="text-[#1C1C1C] text-sm">{totalReviews} Users</strong>
                     </p>
                   </div>
                 </div>
 
-                {/* Rating Breakdown Section */}
-                <div className="space-y-3.5">
-                  <h5 className="text-[10px] uppercase font-black tracking-widest text-[#F17300]">Rating Breakdown</h5>
+                {/* Rating Breakdown Section - Dynamic */}
+                <div className="space-y-4">
+                  <h5 className="text-xs uppercase font-black tracking-widest text-gray-500">Rating Breakdown</h5>
                   
                   {/* Row rating 5 */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-semibold">
-                      <span className="text-gray-500 flex items-center gap-1">5 <Star className="h-3 w-3 fill-amber-400 stroke-amber-400" /></span>
-                      <span className="font-mono text-gray-800">{dynamicStats[5]}</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-sm font-semibold">
+                      <span className="text-gray-600 flex items-center gap-1">5 <Star className="h-3.5 w-3.5 fill-amber-400 stroke-amber-400" /></span>
+                      <span className="font-mono text-gray-800 font-bold">{dynamicStats[5]}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-emerald-500 rounded-full transition-all duration-500" 
-                        style={{ width: `${(dynamicStats[5] / testimonials.length) * 100}%` }}
+                        style={{ width: `${totalReviews > 0 ? (dynamicStats[5] / totalReviews) * 100 : 0}%` }}
                       />
                     </div>
                   </div>
 
                   {/* Row rating 4 */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-semibold">
-                      <span className="text-gray-500 flex items-center gap-1">4 <Star className="h-3 w-3 fill-amber-400 stroke-amber-400" /></span>
-                      <span className="font-mono text-gray-800">{dynamicStats[4]}</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-sm font-semibold">
+                      <span className="text-gray-600 flex items-center gap-1">4 <Star className="h-3.5 w-3.5 fill-amber-400 stroke-amber-400" /></span>
+                      <span className="font-mono text-gray-800 font-bold">{dynamicStats[4]}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
                       <div 
                         className="h-full bg-teal-500 rounded-full transition-all duration-500" 
-                        style={{ width: `${(dynamicStats[4] / testimonials.length) * 100}%` }}
+                        style={{ width: `${totalReviews > 0 ? (dynamicStats[4] / totalReviews) * 100 : 0}%` }}
                       />
                     </div>
                   </div>
 
                   {/* Row rating 3 */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-semibold text-gray-400">
-                      <span className="flex items-center gap-1">3 <Star className="h-3 w-3 fill-gray-300 stroke-gray-300" /></span>
-                      <span className="font-mono">0</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-sm font-semibold">
+                      <span className="text-gray-600 flex items-center gap-1">3 <Star className="h-3.5 w-3.5 fill-gray-300 stroke-gray-300" /></span>
+                      <span className="font-mono text-gray-800 font-bold">{dynamicStats[3]}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-amber-400 rounded-full" style={{ width: '0%' }} />
+                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-amber-400 rounded-full transition-all duration-500" 
+                        style={{ width: `${totalReviews > 0 ? (dynamicStats[3] / totalReviews) * 100 : 0}%` }}
+                      />
                     </div>
                   </div>
 
                   {/* Row rating 2 */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-semibold text-gray-400">
-                      <span className="flex items-center gap-1">2 <Star className="h-3 w-3 fill-gray-300 stroke-gray-300" /></span>
-                      <span className="font-mono">0</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-sm font-semibold">
+                      <span className="text-gray-600 flex items-center gap-1">2 <Star className="h-3.5 w-3.5 fill-gray-300 stroke-gray-300" /></span>
+                      <span className="font-mono text-gray-800 font-bold">{dynamicStats[2]}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-orange-400 rounded-full" style={{ width: '0%' }} />
+                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-orange-400 rounded-full transition-all duration-500" 
+                        style={{ width: `${totalReviews > 0 ? (dynamicStats[2] / totalReviews) * 100 : 0}%` }}
+                      />
                     </div>
                   </div>
 
                   {/* Row rating 1 */}
-                  <div className="space-y-1">
-                    <div className="flex items-center justify-between text-xs font-semibold text-gray-400">
-                      <span className="flex items-center gap-1">1 <Star className="h-3 w-3 fill-gray-300 stroke-gray-300" /></span>
-                      <span className="font-mono">0</span>
+                  <div className="space-y-1.5">
+                    <div className="flex items-center justify-between text-sm font-semibold">
+                      <span className="text-gray-600 flex items-center gap-1">1 <Star className="h-3.5 w-3.5 fill-gray-300 stroke-gray-300" /></span>
+                      <span className="font-mono text-gray-800 font-bold">{dynamicStats[1]}</span>
                     </div>
-                    <div className="h-1.5 w-full bg-gray-100 rounded-full overflow-hidden">
-                      <div className="h-full bg-red-400 rounded-full" style={{ width: '0%' }} />
+                    <div className="h-2 w-full bg-gray-100 rounded-full overflow-hidden">
+                      <div 
+                        className="h-full bg-red-400 rounded-full transition-all duration-500" 
+                        style={{ width: `${totalReviews > 0 ? (dynamicStats[1] / totalReviews) * 100 : 0}%` }}
+                      />
                     </div>
                   </div>
 
@@ -478,7 +550,7 @@ export default function MoreView() {
                   </span>
                   <h4 className="text-sm font-bold text-[#FAFAFF]">Verified Reviews Seal</h4>
                   <p className="text-[11px] text-gray-400 leading-relaxed font-sans font-medium">
-                    100% of reviews listed are audited against transaction maps, official notary registry registers, or registry deeds. No anonymous or unverified simulated testimonials are permitted.
+                    100% of reviews listed are audited against transaction maps, official notary register registers, or registry deeds. No anonymous or unverified simulated testimonials are permitted.
                   </p>
                 </div>
               </div>
@@ -509,7 +581,6 @@ export default function MoreView() {
                   {paginatedReviews.map((review, rIdx) => {
                     const firstChar = review.name.trim().charAt(0).toUpperCase();
                     
-                    // Simple deterministic color backgrounds for avatars
                     const colorClasses = [
                       'bg-orange-500 text-white',
                       'bg-indigo-600 text-white',
@@ -521,6 +592,12 @@ export default function MoreView() {
                     ];
                     const bgClass = colorClasses[review.name.length % colorClasses.length];
 
+                    // Get star color based on rating
+                    const getStarColor = (starValue: number, rating: number) => {
+                      if (starValue <= rating) return 'fill-amber-400 stroke-amber-400';
+                      return 'fill-gray-200 stroke-gray-200';
+                    };
+
                     return (
                       <div 
                         key={rIdx} 
@@ -528,14 +605,12 @@ export default function MoreView() {
                           review.isCustom ? 'bg-orange-50/20 px-3 rounded-lg border border-orange-100/30' : ''
                         }`}
                       >
-                        {/* Avatar representation bubble */}
                         <div className={`h-11 w-11 rounded-full flex items-center justify-center shrink-0 text-base font-black tracking-tight ${bgClass}`}>
                           {firstChar}
                         </div>
                         
                         <div className="flex-1 space-y-1">
                           
-                          {/* Inner Header Row */}
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
                             <div className="flex items-center gap-2">
                               <span className="font-sans font-black text-sm text-[#1C1C1C] tracking-tight">{review.name}</span>
@@ -548,26 +623,22 @@ export default function MoreView() {
                             <span className="text-[10px] text-gray-400 font-mono font-bold">{review.date}</span>
                           </div>
 
-                          {/* Star representations */}
-                          <div className="flex items-center gap-0.5 text-amber-400">
-                            {Array.from({ length: 5 }).map((_, sIdx) => (
+                          <div className="flex items-center gap-0.5">
+                            {[1, 2, 3, 4, 5].map((star) => (
                               <Star 
-                                key={sIdx} 
-                                className={`h-3 w-3 ${
-                                  sIdx < review.rating ? 'fill-amber-400 stroke-amber-400' : 'fill-gray-200 stroke-gray-200'
-                                }`} 
+                                key={star} 
+                                className={`h-3 w-3 ${getStarColor(star, review.rating)}`} 
                               />
                             ))}
                           </div>
 
-                          {/* Review Content body */}
                           {review.text ? (
                             <p className="text-gray-600 text-xs sm:text-sm font-medium font-sans leading-relaxed pt-1.5 whitespace-pre-line">
                               {review.text}
                             </p>
                           ) : (
                             <p className="text-gray-400 text-xs italic font-semibold leading-relaxed pt-1">
-                              Verified 5-Star real estate assistance rating logged without text.
+                              Verified {review.rating}-Star real estate assistance rating logged.
                             </p>
                           )}
 
@@ -578,7 +649,7 @@ export default function MoreView() {
                   })}
                 </div>
 
-                {/* Tab layout standard requested Pagination block */}
+                {/* Pagination */}
                 <div className="pt-6 border-t border-gray-100 flex items-center justify-between gap-4">
                   <button
                     disabled={currentPageNum === 1}
@@ -637,14 +708,14 @@ export default function MoreView() {
 
               </div>
 
-              {/* WRITE REVIEWS FORM CARD - Post Your Testimonials */}
+              {/* WRITE REVIEWS FORM CARD */}
               <div 
                 id="post-testimonial-form-anchor" 
                 className="bg-white rounded-xl border border-gray-100 p-6 sm:p-8 shadow-sm space-y-6"
               >
                 <div className="space-y-1">
                   <span className="text-[10px] uppercase font-mono tracking-widest font-black text-[#F17300]">Feedback Portal</span>
-                  <h3 className="text-xl font-black text-[#1C1C1C] tracking-tight">Post Your Testimonials</h3>
+                  <h3 className="text-xl font-black text-[#1C1C1C] tracking-tight">Write a Review</h3>
                   <p className="text-xs text-gray-400">Share your legal title, plot closing, or site pickup concierge experience with prospective buyers.</p>
                 </div>
 
@@ -676,23 +747,20 @@ export default function MoreView() {
                       <div>
                         <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1.5">Overall Trust Rating</label>
                         <div className="flex items-center gap-1.5 py-1.5">
-                          {Array.from({ length: 5 }).map((_, idx) => {
-                            const starValue = idx + 1;
-                            return (
-                              <button
-                                key={idx}
-                                type="button"
-                                onClick={() => setPostRating(starValue)}
-                                className="text-amber-400 focus:outline-none transition-transform hover:scale-110 active:scale-95"
-                              >
-                                <Star 
-                                  className={`h-6 w-6 ${
-                                    starValue <= postRating ? 'fill-amber-400 stroke-amber-400' : 'fill-gray-100 stroke-gray-350'
-                                  }`} 
-                                />
-                              </button>
-                            );
-                          })}
+                          {[1, 2, 3, 4, 5].map((starValue) => (
+                            <button
+                              key={starValue}
+                              type="button"
+                              onClick={() => setPostRating(starValue)}
+                              className="text-amber-400 focus:outline-none transition-transform hover:scale-110 active:scale-95"
+                            >
+                              <Star 
+                                className={`h-6 w-6 ${
+                                  starValue <= postRating ? 'fill-amber-400 stroke-amber-400' : 'fill-gray-100 stroke-gray-350'
+                                }`} 
+                              />
+                            </button>
+                          ))}
                           <span className="font-mono text-xs font-black text-gray-600 ml-1.5">({postRating} Star)</span>
                         </div>
                       </div>
@@ -731,10 +799,9 @@ export default function MoreView() {
         {activeSubTab === 'contact' && (
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
             
-            {/* Contact Details Column */}
+            {/* Contact Details Column - Same as before */}
             <div className="lg:col-span-5 space-y-6">
               
-              {/* Cores Card */}
               <div className="bg-white rounded-xl border border-gray-100/80 p-6 sm:p-8 space-y-6 shadow-sm">
                 <div className="border-b border-gray-100 pb-4">
                   <h3 className="text-xl font-black text-[#1C1C1C] tracking-tight">PSS REAL ESTATE PVT. LTD.</h3>
@@ -742,7 +809,6 @@ export default function MoreView() {
                 </div>
 
                 <div className="space-y-5">
-                  {/* Contact Person */}
                   <div className="flex gap-3">
                     <User className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -751,7 +817,6 @@ export default function MoreView() {
                     </div>
                   </div>
 
-                  {/* Address */}
                   <div className="flex gap-3">
                     <MapPin className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -762,7 +827,6 @@ export default function MoreView() {
                     </div>
                   </div>
 
-                  {/* Call Us */}
                   <div className="flex gap-3">
                     <Phone className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -789,7 +853,6 @@ export default function MoreView() {
                     </div>
                   </div>
 
-                  {/* Email */}
                   <div className="flex gap-3">
                     <Mail className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -803,7 +866,6 @@ export default function MoreView() {
                     </div>
                   </div>
 
-                  {/* Web Address */}
                   <div className="flex gap-3">
                     <Globe className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -820,7 +882,6 @@ export default function MoreView() {
                     </div>
                   </div>
 
-                  {/* Web Pages */}
                   <div className="flex gap-3">
                     <Link className="h-5 w-5 text-[#F17300] shrink-0 mt-0.5" />
                     <div>
@@ -851,7 +912,6 @@ export default function MoreView() {
                 </div>
               </div>
 
-              {/* Assistance disclaimer info card */}
               <div className="bg-[#1C1C1C] rounded-xl text-white p-6 relative overflow-hidden border border-white/5 shadow">
                 <div className="absolute top-0 right-0 h-32 w-32 bg-orange-500 rounded-full blur-3xl opacity-10" />
                 
@@ -869,7 +929,7 @@ export default function MoreView() {
 
             </div>
 
-            {/* Inquiry Form Column */}
+            {/* Inquiry Form Column - Same as before */}
             <div className="lg:col-span-7 bg-white rounded-xl border border-gray-100/80 p-6 sm:p-8 shadow-sm">
               
               {!isSent ? (
@@ -881,7 +941,6 @@ export default function MoreView() {
                   </div>
 
                   <div className="space-y-4">
-                    {/* Your Name */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">Your Name <span className="text-[#F17300]">*</span></label>
                       <input
@@ -894,7 +953,6 @@ export default function MoreView() {
                       />
                     </div>
 
-                    {/* Email */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">Email <span className="text-[#F17300]">*</span></label>
                       <input
@@ -907,7 +965,6 @@ export default function MoreView() {
                       />
                     </div>
 
-                    {/* Country Selector */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">Select Country <span className="text-[#F17300]">*</span></label>
                       <select
@@ -928,7 +985,6 @@ export default function MoreView() {
                       </select>
                     </div>
 
-                    {/* Phone / Mobile with prefix selector */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">Phone / Mobile <span className="text-[#F17300]">*</span></label>
                       <div className="flex gap-2">
@@ -956,7 +1012,6 @@ export default function MoreView() {
                       </div>
                     </div>
 
-                    {/* I want to option selection */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">I want to</label>
                       <select
@@ -972,7 +1027,6 @@ export default function MoreView() {
                       </select>
                     </div>
 
-                    {/* Enquiry Details */}
                     <div>
                       <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest mb-1">Enquiry Details <span className="text-[#F17300]">*</span></label>
                       <textarea

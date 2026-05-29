@@ -10,16 +10,29 @@ interface PropertyCardProps {
   key?: string;
   property: Property;
   onOpenBooking: (propertyId?: string) => void;
+  isDarkMode?: boolean; // Add this prop
 }
 
-export default function PropertyCard({ property, onOpenBooking }: PropertyCardProps) {
+export default function PropertyCard({ property, onOpenBooking, isDarkMode = false }: PropertyCardProps) {
   // Use first image or fallback
   const displayImage = property.images[0] || "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=600&q=80";
+
+  // Define colors based on dark mode
+  const cardBg = isDarkMode ? 'bg-[#1C1C1C]' : 'bg-white';
+  const borderColor = isDarkMode ? 'border-white/10' : 'border-gray-100/80';
+  const shadowColor = isDarkMode ? 'shadow-2xl shadow-black/50' : 'shadow-xl shadow-gray-200/50';
+  const titleColor = isDarkMode ? 'text-white' : 'text-[#1C1C1C]';
+  const textColor = isDarkMode ? 'text-gray-300' : 'text-gray-500';
+  const locationColor = isDarkMode ? 'text-gray-400' : 'text-gray-500';
+  const borderBottomColor = isDarkMode ? 'border-white/10' : 'border-gray-100';
+  const buttonBorderColor = isDarkMode ? 'border-white/20 hover:border-white' : 'border-gray-200 hover:border-[#1C1C1C]';
+  const buttonTextColor = isDarkMode ? 'text-white hover:bg-white hover:text-[#1C1C1C]' : 'text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-white';
+  const priceColor = isDarkMode ? 'text-[#FA8C17]' : 'text-[#F17300]';
 
   return (
     <div
       id={`property-card-${property.id}`}
-      className="group relative flex flex-col h-full rounded-xl bg-white border border-gray-100/80 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden"
+      className={`group relative flex flex-col h-full rounded-xl ${cardBg} ${borderColor} ${shadowColor} hover:shadow-2xl hover:scale-[1.02] transition-all duration-300 overflow-hidden`}
     >
       {/* Thumbnail Frame */}
       <div className="relative aspect-[4/3] w-full overflow-hidden bg-gray-100">
@@ -65,33 +78,33 @@ export default function PropertyCard({ property, onOpenBooking }: PropertyCardPr
         
         {/* Metric / Price Strip */}
         <div className="flex items-center justify-between mb-2">
-          <h4 className="text-xl font-extrabold text-[#F17300] tracking-tight">
+          <h4 className={`text-xl font-extrabold ${priceColor} tracking-tight`}>
             {property.price}
           </h4>
-          <p className="text-xs text-gray-400 font-mono flex items-center gap-1">
+          <p className={`text-xs ${textColor} font-mono flex items-center gap-1`}>
             <Maximize className="h-3.5 w-3.5" />
             <span>{property.area}</span>
           </p>
         </div>
 
         {/* Card Heading Title */}
-        <h3 className="text-base font-bold text-[#1C1C1C] tracking-tight group-hover:text-[#F17300] transition-colors leading-snug line-clamp-1 mb-1">
+        <h3 className={`text-base font-bold ${titleColor} tracking-tight group-hover:text-[#F17300] transition-colors leading-snug line-clamp-1 mb-1`}>
           {property.title}
         </h3>
 
         {/* Location Pointer */}
-        <div className="flex items-start gap-1.5 text-gray-500 text-xs mb-3">
+        <div className={`flex items-start gap-1.5 ${locationColor} text-xs mb-3`}>
           <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0 mt-0.5" />
           <span className="line-clamp-1">{property.location}</span>
         </div>
 
         {/* Snippet Description */}
-        <p className="text-xs text-gray-500 font-normal leading-relaxed mb-4 line-clamp-2">
+        <p className={`text-xs ${textColor} font-normal leading-relaxed mb-4 line-clamp-2`}>
           {property.description}
         </p>
 
         {/* Specs Grid */}
-        <div className="grid grid-cols-2 gap-3 py-3 border-y border-gray-100 text-xs text-gray-500 font-serif mb-5">
+        <div className={`grid grid-cols-2 gap-3 py-3 border-y ${borderBottomColor} text-xs ${textColor} font-serif mb-5`}>
           {property.bedrooms && (
             <div className="flex items-center gap-1.5">
               <BedDouble className="h-4 w-4 text-[#F17300] shrink-0" />
@@ -126,7 +139,7 @@ export default function PropertyCard({ property, onOpenBooking }: PropertyCardPr
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
             id={`btn-open-prop-page-${property.id}`}
-            className="flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-sm border border-gray-200 hover:border-[#1C1C1C] text-[#1C1C1C] hover:bg-[#1C1C1C] hover:text-white font-bold text-xs tracking-wider uppercase transition-all cursor-pointer"
+            className={`flex items-center justify-center gap-1.5 py-2.5 px-3 rounded-sm ${buttonBorderColor} ${buttonTextColor} font-bold text-xs tracking-wider uppercase transition-all cursor-pointer`}
           >
             <span>View Info</span>
             <ExternalLink className="h-3 w-3" />

@@ -125,12 +125,12 @@ export default function BlogView() {
   return (
     <div className="space-y-12 pb-16 font-sans bg-[#FAFAFF]">
       
-      {/* Hero Section */}
-      <section className="relative h-[350px] md:h-[400px] w-full overflow-hidden">
+      {/* Hero Section - Increased Size with New Photo */}
+      <section className="relative h-[500px] md:h-[600px] w-full overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1920&q=80"
-            alt="Blog"
+            src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
+            alt="Blog - Real Estate Insights"
             className="h-full w-full object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/70 to-black/50" />
@@ -143,10 +143,10 @@ export default function BlogView() {
               <ArrowRight className="h-3 w-3" />
               <span className="text-[#F17300]">Blogs</span>
             </div>
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-white tracking-tight leading-tight mb-4">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-white tracking-tight leading-tight mb-4">
               Insights & Intelligence
             </h1>
-            <p className="text-base text-gray-200 leading-relaxed max-w-2xl">
+            <p className="text-base md:text-lg text-gray-200 leading-relaxed max-w-2xl">
               Expert perspectives on real estate investment, legal compliance, market trends, 
               and property buying guides from industry leaders.
             </p>

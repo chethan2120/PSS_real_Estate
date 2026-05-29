@@ -6,7 +6,6 @@
 import { useState, useEffect } from 'react';
 import { Building2, Mail, Phone, MapPin, Compass, Shield, Clock, Newspaper } from 'lucide-react';
 import { COMPANY_INFO } from '../data';
-import LogoImage from '../assets/images/Logo of PSS.jpeg';
 
 const UKFlag = () => (
   <svg viewBox="0 0 50 30" strokeLinecap="round" strokeLinejoin="round" className="w-5.5 h-3.5 border border-white/20 shadow-xs inline-block bg-[#012169]">
@@ -46,6 +45,31 @@ const IndiaFlag = () => (
     <circle cx="1.5" cy="1" r="0.04" fill="#000080" />
     <line x1="1.5" y1="0.82" x2="1.5" y2="1.18" stroke="#000080" strokeWidth="0.015" />
     <line x1="1.32" y1="1" x2="1.68" y2="1" stroke="#000080" strokeWidth="0.015" />
+  </svg>
+);
+
+// Social Media Icons
+const InstagramIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM12 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+  </svg>
+);
+
+const TwitterIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
+const FacebookIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+  </svg>
+);
+
+const YoutubeIcon = ({ className = "h-5 w-5" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={className} fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.376.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.376-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
   </svg>
 );
 
@@ -90,15 +114,55 @@ export default function Footer({ setCurrentPage }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
 
-          {/* Col 1 - Logo Image instead of text */}
+          {/* Col 1 - SVG Logo directly embedded */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center h-12 w-auto overflow-hidden">
-                <img 
-                  src={LogoImage} 
-                  alt="PSS Real Estate Logo"
-                  className="h-12 w-auto object-contain"
-                />
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 680 120" 
+                  className="h-12 w-auto text-[#FA8C17]"
+                  fill="currentColor"
+                >
+                  <defs>
+                    <mask id="window-mask-footer">
+                      <rect width="100%" height="100%" fill="white" />
+                      <rect x="49" y="26" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="61" y="26" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="49" y="41" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="61" y="41" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="49" y="56" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="61" y="56" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="49" y="71" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="61" y="71" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="49" y="86" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="61" y="86" width="6" height="9" fill="black" rx="0.5" />
+                      <rect x="82" y="52" width="6" height="8" fill="black" rx="0.5" />
+                      <rect x="92" y="52" width="6" height="8" fill="black" rx="0.5" />
+                      <rect x="82" y="66" width="6" height="8" fill="black" rx="0.5" />
+                      <rect x="92" y="66" width="6" height="8" fill="black" rx="0.5" />
+                      <rect x="82" y="80" width="6" height="8" fill="black" rx="0.5" />
+                      <rect x="92" y="80" width="6" height="8" fill="black" rx="0.5" />
+                    </mask>
+                  </defs>
+                  <g>
+                    <path d="M38 32 v73 h-24 v-8 l6 -5 v-8 l-6 -5 v-8 l6 -5 v-8 l-6 -5 v-8 l6 -5 z" />
+                    <g mask="url(#window-mask-footer)">
+                      <rect x="43" y="14" width="30" height="91" rx="1" />
+                      <rect x="77" y="42" width="25" height="63" rx="1" />
+                    </g>
+                    <text 
+                      x="120" 
+                      y="76" 
+                      fontFamily="'Outfit', 'Inter', system-ui, sans-serif" 
+                      fontWeight="700" 
+                      fontSize="43" 
+                      letterSpacing="0.01em"
+                    >
+                      PSS REAL ESTATE PVT. LTD.
+                    </text>
+                  </g>
+                </svg>
               </div>
             </div>
             <p className="text-xs text-gray-400 leading-relaxed font-sans">
@@ -144,7 +208,6 @@ export default function Footer({ setCurrentPage }: FooterProps) {
               </li>
               <li>
                 <button onClick={() => handleNav('blogs')} className="hover:text-white transition-colors duration-200 flex items-center gap-1.5">
-                 
                   Blogs & Insights
                 </button>
               </li>
@@ -176,7 +239,7 @@ export default function Footer({ setCurrentPage }: FooterProps) {
             </ul>
           </div>
 
-          {/* Col 4 Direct Coordinates */}
+          {/* Col 4 Direct Coordinates + Social Media */}
           <div className="space-y-4">
             <h4 className="text-sm font-bold uppercase tracking-wider text-gray-300">
               Direct Coordinates
@@ -195,29 +258,94 @@ export default function Footer({ setCurrentPage }: FooterProps) {
                 <span className="break-all text-[11px] font-mono">{COMPANY_INFO.contact.email}</span>
               </li>
             </ul>
+
+            {/* Social Media Section */}
+            <div className="pt-4">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-gray-300 mb-3">
+                Follow Us
+              </h4>
+              <div className="flex items-center gap-4">
+                <a 
+                  href="https://instagram.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#F17300] transition-colors duration-200"
+                  aria-label="Instagram"
+                >
+                  <InstagramIcon className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://twitter.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#F17300] transition-colors duration-200"
+                  aria-label="Twitter"
+                >
+                  <TwitterIcon className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://facebook.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#F17300] transition-colors duration-200"
+                  aria-label="Facebook"
+                >
+                  <FacebookIcon className="h-5 w-5" />
+                </a>
+                <a 
+                  href="https://youtube.com" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-[#F17300] transition-colors duration-200"
+                  aria-label="YouTube"
+                >
+                  <YoutubeIcon className="h-5 w-5" />
+                </a>
+              </div>
+            </div>
           </div>
 
         </div>
 
-        {/* Bottom copyright and requested attribution */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-          <div className="flex items-center gap-2">
-            <Shield className="h-4 w-4 text-[#F17300]" />
-            <span>© {currentYear} {COMPANY_INFO.name}. All legal rights reserved.</span>
-          </div>
-          
-          {/* Requested Attibution: Designed and Maintained by WebNxt */}
-          <div id="attribution-footer-block" className="flex items-center text-[11px] font-medium tracking-wide">
-            <span>Designed and Maintained by&nbsp;</span>
-            <a 
-              href="https://webnxt.co/"
-              target="_blank"
-              rel="noopener noreferrer"
-              id="webnxt-attribution-link"
-              className="text-[#F17300] hover:text-[#FAFAFF] font-bold underline underline-offset-4 decoration-orange-500/30 hover:decoration-white transition-all duration-200"
-            >
-              WebNxt
-            </a>
+        {/* Bottom copyright - Single line layout */}
+        <div className="mt-12 pt-8 border-t border-white/10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+            {/* Left: Copyright */}
+            <div className="flex items-center gap-2">
+              <Shield className="h-4 w-4 text-[#F17300]" />
+              <span>© {currentYear} {COMPANY_INFO.name}. All rights reserved.</span>
+            </div>
+            
+            {/* Center: Designed and Maintained by WebNxt */}
+            <div id="attribution-footer-block" className="flex items-center text-[11px] font-medium tracking-wide">
+              <span>Designed and Maintained by&nbsp;</span>
+              <a 
+                href="https://webnxt.co/"
+                target="_blank"
+                rel="noopener noreferrer"
+                id="webnxt-attribution-link"
+                className="text-[#F17300] hover:text-[#FAFAFF] font-bold underline underline-offset-4 decoration-orange-500/30 hover:decoration-white transition-all duration-200"
+              >
+                WebNxt
+              </a>
+            </div>
+            
+            {/* Right: Terms and Privacy */}
+            <div className="flex items-center gap-3">
+              <button 
+                onClick={() => handleNav('more')}
+                className="hover:text-white transition-colors duration-200"
+              >
+                Terms of Representation
+              </button>
+              <span className="text-gray-600">|</span>
+              <button 
+                onClick={() => handleNav('more')}
+                className="hover:text-white transition-colors duration-200"
+              >
+                Privacy Covenant
+              </button>
+            </div>
           </div>
         </div>
 

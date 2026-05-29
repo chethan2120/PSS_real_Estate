@@ -7,7 +7,7 @@ import { motion } from 'motion/react';
 import { 
   Award, Shield, Users, ArrowRight, ArrowUpRight, Compass, HelpCircle, Flame, Star, 
   MapPin, CheckCircle2, ChevronRight, MessageSquare, Sparkles, TrendingUp, Crown, 
-  FileText, Briefcase, Phone
+  FileText, Briefcase, Phone, Building2, Eye
 } from 'lucide-react';
 import { COMPANY_INFO, PROPERTIES, PROJECTS, LOCALITIES, TESTIMONIALS, FAQS } from '../data';
 import PropertyCard from '../components/PropertyCard';
@@ -30,8 +30,10 @@ interface HomeViewProps {
 
 export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewProps) {
   
-  // Highlight only top 3 featured properties
-  const featuredProperties = PROPERTIES.slice(0, 3);
+  // Take 4 featured properties for even grid
+  const featuredProperties = PROPERTIES.slice(0, 4);
+  // Take 4 projects for display
+  const displayProjects = PROJECTS.slice(0, 4);
 
   // Setup WhatsApp redirect link
   const handleGeneralWhatsApp = () => {
@@ -39,9 +41,9 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
   };
 
   return (
-    <div className="space-y-20 pb-16">
+    <div className="space-y-0 pb-16">
       
-      {/* 1. Value Proposition Stats strip */}
+      {/* SECTION 1: Value Proposition Stats strip - WHITE */}
       <section className="bg-white border-y border-gray-100 py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y lg:divide-y-0 lg:divide-x divide-gray-100">
@@ -55,86 +57,100 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
         </div>
       </section>
 
-      {/* 2. Client Trust Anchors */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
-          <div className="space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">
-              Uncompromising Quality Standards
-            </span>
-            <h2 className="text-3xl md:text-4xl font-black text-[#1C1C1C] tracking-tight leading-none">
-              Why PSS Stands Absolute
-            </h2>
-            <p className="text-sm text-gray-500 leading-relaxed font-sans max-w-md">
-              In real estate, security is everything. We construct trust through rigid verification of documents, uncompromising materials, and a customer-centric code of ethics.
-            </p>
-            <div className="pt-2">
-              <button
-                onClick={() => onNavigateToTab('profile')}
-                className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-[#F17300] hover:text-[#1C1C1C] transition-colors"
-              >
-                <span>Read Corporate Profile</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-
-          <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
-              <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
-                <Shield className="h-5 w-5" />
-              </div>
-              <h3 className="text-base font-bold text-[#1C1C1C]">25-Point Paperwork Check</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">Every builder floor, commercial shop, and highrise flat undergoes deep legal title searches.</p>
-            </div>
-            <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
-              <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
-                <Award className="h-5 w-5" />
-              </div>
-              <h3 className="text-base font-bold text-[#1C1C1C]">Certified Premium Builders</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">We only partner with developers with immaculate quality records.</p>
-            </div>
-            <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
-              <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
-                <Users className="h-5 w-5" />
-              </div>
-              <h3 className="text-base font-bold text-[#1C1C1C]">Zero Brokerage Friction</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">Direct builder rates and zero-brokerage models.</p>
-            </div>
-            <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
-              <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
-                <Flame className="h-5 w-5" />
-              </div>
-              <h3 className="text-base font-bold text-[#1C1C1C]">RERA Compliant Directory</h3>
-              <p className="text-xs text-gray-500 leading-relaxed">100% official RERA state registration mapping.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 3. Featured Properties Segment */}
-      <section className="bg-gray-50/50 py-16 border-y border-gray-100">
+      {/* SECTION 2: Client Trust Anchors - CREAM ORANGE */}
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50/50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-baseline justify-between mb-10 gap-4">
-            <div className="space-y-1">
-              <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">Breathtaking Spaces</span>
-              <h2 className="text-3xl md:text-4xl font-black text-[#1C1C1C] tracking-tight">Featured Properties Showcase</h2>
-              <p className="text-xs sm:text-sm text-gray-500 max-w-lg">Sovereign builder floors and premium retail spots presenting elite design.</p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+            <div className="space-y-4">
+              <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">
+                Uncompromising Quality Standards
+              </span>
+              <h2 className="text-3xl md:text-4xl font-black text-[#1C1C1C] tracking-tight leading-none">
+                Why PSS Stands Absolute
+              </h2>
+              <p className="text-sm text-gray-600 leading-relaxed font-sans max-w-md">
+                In real estate, security is everything. We construct trust through rigid verification of documents, uncompromising materials, and a customer-centric code of ethics.
+              </p>
+              <div className="pt-2">
+                <button
+                  onClick={() => onNavigateToTab('profile')}
+                  className="inline-flex items-center gap-1.5 text-xs font-bold uppercase text-[#F17300] hover:text-[#1C1C1C] transition-colors"
+                >
+                  <span>Read Corporate Profile</span>
+                  <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
             </div>
-            <button onClick={() => onNavigateToTab('property')} className="px-5 py-2.5 rounded-sm border border-gray-200 hover:border-[#1C1C1C] text-[#1C1C1C] font-bold text-xs tracking-wider uppercase transition-all shrink-0 flex items-center gap-1.5">
-              <span>Explore All Listings</span>
-              <ArrowUpRight className="h-4 w-4" />
-            </button>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProperties.map((property) => (
-              <PropertyCard key={property.id} property={property} onOpenBooking={onOpenBooking} />
-            ))}
+
+            <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
+                <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
+                  <Shield className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-[#1C1C1C]">25-Point Paperwork Check</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">Every builder floor, commercial shop, and highrise flat undergoes deep legal title searches.</p>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
+                <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
+                  <Award className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-[#1C1C1C]">Certified Premium Builders</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">We only partner with developers with immaculate quality records.</p>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
+                <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
+                  <Users className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-[#1C1C1C]">Zero Brokerage Friction</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">Direct builder rates and zero-brokerage models.</p>
+              </div>
+              <div className="bg-white rounded-xl border border-gray-100/80 shadow-xl shadow-gray-200/50 p-6 space-y-3">
+                <div className="h-10 w-10 flex items-center justify-center rounded-lg bg-[#F17300]/10 text-[#F17300]">
+                  <Flame className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-bold text-[#1C1C1C]">RERA Compliant Directory</h3>
+                <p className="text-xs text-gray-500 leading-relaxed">100% official RERA state registration mapping.</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 4. Popular Localities Bento Grid - CREAM ORANGE BACKGROUND */}
+      {/* SECTION 3: Featured Properties Segment - LIGHT GRAY */}
+<section className="bg-gray-100 py-20">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12">
+      <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono inline-block bg-white px-3 py-1 rounded-full mb-4">
+        Breathtaking Spaces
+      </span>
+      <h2 className="text-3xl md:text-5xl font-black text-[#1C1C1C] tracking-tight mb-4">
+        Featured NCR Masterpieces
+      </h2>
+      <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+        PSS coordinates directly with premier contractors to present signature developments. 
+        Sovereign builder floors and premium retail spots presenting elite design.
+      </p>
+    </div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {featuredProperties.map((property) => (
+        <PropertyCard key={property.id} property={property} onOpenBooking={onOpenBooking} />
+      ))}
+    </div>
+    
+    <div className="text-center mt-12">
+      <button 
+        onClick={() => onNavigateToTab('property')} 
+        className="inline-flex items-center gap-2 px-8 py-3 rounded-full bg-[#F17300] hover:bg-[#d66500] text-white font-bold text-sm uppercase tracking-wider transition-all transform hover:scale-105"
+      >
+        <Eye className="h-5 w-5" />
+        <span>View All Properties</span>
+      </button>
+    </div>
+  </div>
+</section>
+
+      {/* SECTION 4: Popular Localities Bento Grid - CREAM ORANGE */}
       <section className="bg-gradient-to-br from-amber-50 to-orange-50/50 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-2 mb-12">
@@ -186,39 +202,47 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
         </div>
       </section>
 
-      {/* 5. Active Projects Teaser */}
-      <section className="bg-[#1C1C1C] text-white py-16 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-            <div className="lg:col-span-5 space-y-6">
-              <span className="text-xs font-bold uppercase tracking-widest text-[#F17300] font-mono">Flagship Developments</span>
-              <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight leading-none">Featured NCR Masterpieces</h2>
-              <p className="text-sm text-gray-400 leading-relaxed">PSS coordinates directly with premier contractors to present signature developments.</p>
-              <ul className="space-y-3.5 text-xs text-gray-300">
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4.5 w-4.5 text-[#F17300] shrink-0 mt-0.5" /><span>Maxvel Alvista: 4 BHK premium luxury independent complexes</span></li>
-                <li className="flex items-start gap-2"><CheckCircle2 className="h-4.5 w-4.5 text-[#F17300] shrink-0 mt-0.5" /><span>Noble Ayra: Ready-to-move-in independent designer floors</span></li>
-              </ul>
-              <button onClick={() => onNavigateToTab('projects')} className="px-6 py-3 rounded-sm bg-[#F17300] hover:bg-[#d66500] text-white font-bold uppercase tracking-widest text-xs">Inspect Projects Details</button>
-            </div>
-            <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
-              {PROJECTS.map((proj) => (
-                <div key={proj.id} className="relative rounded-2xl overflow-hidden aspect-[4/3] group border border-white/5 shadow-2xl">
-                  <img src={proj.images[0]} alt={proj.name} referrerPolicy="no-referrer" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                  <div className="absolute bottom-5 left-5 right-5 space-y-1.5 text-white">
-                    <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-[#F17300] text-white">{proj.status}</span>
-                    <h3 className="text-lg font-bold">{proj.name}</h3>
-                    <p className="text-[11px] text-gray-300 flex items-center gap-1"><MapPin className="h-3 w-3 text-[#F17300]" /><span>{proj.location}</span></p>
-                  </div>
-                </div>
-              ))}
-            </div>
+      {/* SECTION 5: Active Projects Teaser - LIGHT DARK/GRAY */}
+<section className="bg-gray-800 py-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12">
+      <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono inline-block bg-gray-700 px-3 py-1 rounded-full mb-4">
+        Flagship Developments
+      </span>
+      <h2 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight mt-2">
+        Our Signature Projects
+      </h2>
+      <p className="text-sm text-gray-300 max-w-2xl mx-auto mt-3">
+        Premium developments crafted with excellence and attention to detail
+      </p>
+    </div>
+    
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {displayProjects.map((proj) => (
+        <div key={proj.id} className="relative rounded-2xl overflow-hidden aspect-[4/3] group border border-gray-700 shadow-lg hover:shadow-2xl transition-all duration-300">
+          <img src={proj.images[0]} alt={proj.name} referrerPolicy="no-referrer" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          <div className="absolute bottom-5 left-5 right-5 space-y-1.5 text-white">
+            <span className="px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-widest bg-[#F17300] text-white inline-block">{proj.status}</span>
+            <h3 className="text-base font-bold">{proj.name}</h3>
+            <p className="text-[10px] text-gray-200 flex items-center gap-1"><MapPin className="h-3 w-3 text-[#F17300]" /><span>{proj.location}</span></p>
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+    
+    <div className="text-center mt-12">
+      <button onClick={() => onNavigateToTab('projects')} className="px-8 py-3 rounded-full bg-[#F17300] hover:bg-[#d66500] text-white font-bold uppercase tracking-widest text-sm transition-all transform hover:scale-105 inline-flex items-center gap-2">
+        <Building2 className="h-5 w-5" />
+        View All Projects
+      </button>
+    </div>
+  </div>
+</section>
+      
 
-      {/* 6. Property Intelligence Section */}
-      <section className="bg-orange-50 py-20 border-y border-orange-100">
+      {/* SECTION 6: Property Intelligence Section - CREAM ORANGE */}
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50/50 py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-black uppercase tracking-widest text-white bg-[#F17300] px-4 py-1.5 rounded-full inline-block mb-4">Intelligence Desk</span>
@@ -226,9 +250,7 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
             <p className="text-sm sm:text-base text-gray-600 leading-relaxed">Read market research guidance from real estate, legal, and investment firms.</p>
           </div>
           
-          {/* Equal Height Cards Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
-            
             {/* Card 1 - GIFT City */}
             <div className="bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden group border border-orange-200 h-full flex flex-col">
               <div className="h-2 bg-gradient-to-r from-[#F17300] to-orange-500"></div>
@@ -300,9 +322,7 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
                 </button>
               </div>
             </div>
-
           </div>
-
           {/* Career Openings Section - WHITE BACKGROUND */}
           <div className="bg-white rounded-3xl p-8 md:p-12 mb-12 border border-orange-100 shadow-lg">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
@@ -394,29 +414,34 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
               </div>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* 7. Testimonials */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-2 mb-12">
-          <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">Verified Experiences</span>
-          <h2 className="text-3xl md:text-4xl font-black text-[#1C1C1C] tracking-tight">Client Tributes and Reviews</h2>
-        </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {TESTIMONIALS.map((test) => (
-            <div key={test.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-              <div className="flex gap-1 mb-4">{[...Array(5)].map((_, i) => (<Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />))}</div>
-              <p className="text-sm text-gray-600 italic mb-4">"{test.content}"</p>
-              <div className="border-t pt-4"><h4 className="font-bold">{test.name}</h4><p className="text-xs text-gray-400">{test.location}</p></div>
-            </div>
-          ))}
+      {/* SECTION 7: Testimonials - DARK/BLACK */}
+      <section className="bg-[#1C1C1C] py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center space-y-2 mb-12">
+            <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">Verified Experiences</span>
+            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight">Client Tributes and Reviews</h2>
+            <p className="text-sm text-gray-400 max-w-2xl mx-auto">What our valued clients say about their experience with PSS Real Estate</p>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            {TESTIMONIALS.map((test) => (
+              <div key={test.id} className="bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-sm p-6 hover:bg-white/15 transition-all">
+                <div className="flex gap-1 mb-4">{[...Array(5)].map((_, i) => (<Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />))}</div>
+                <p className="text-sm text-gray-200 italic mb-4">"{test.content}"</p>
+                <div className="border-t border-white/20 pt-4">
+                  <h4 className="font-bold text-white">{test.name}</h4>
+                  <p className="text-xs text-gray-400">{test.location}</p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* 8. FAQs */}
-      <section className="bg-gray-50/50 py-16">
+      {/* SECTION 8: FAQs - CREAM ORANGE */}
+      <section className="bg-gradient-to-br from-amber-50 to-orange-50/50 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
             <span className="text-xs font-bold uppercase tracking-wider text-[#F17300] font-mono">Frictionless Discoverability</span>
@@ -424,17 +449,20 @@ export default function HomeView({ onOpenBooking, onNavigateToTab }: HomeViewPro
           </div>
           <div className="space-y-4">
             {FAQS.map((faq, idx) => (
-              <div key={idx} className="bg-white rounded-xl border p-5">
-                <div className="flex gap-2 font-bold"><HelpCircle className="h-5 w-5 text-[#F17300] shrink-0" /><span>{faq.q}</span></div>
-                <p className="text-sm text-gray-500 pl-7 mt-2">{faq.a}</p>
+              <div key={idx} className="bg-white rounded-xl border p-5 hover:shadow-lg transition-shadow">
+                <div className="flex gap-2 font-bold"><HelpCircle className="h-5 w-5 text-[#F17300] shrink-0" /><span className="text-[#1C1C1C]">{faq.q}</span></div>
+                <p className="text-sm text-gray-600 pl-7 mt-2">{faq.a}</p>
               </div>
             ))}
           </div>
-          <div className="mt-12 bg-white rounded-xl border border-orange-100 p-6 flex flex-col md:flex-row justify-between gap-4">
-            <div><h3 className="font-bold">Ready to schedule a VIP Site visit?</h3><p className="text-xs text-gray-400">Book with transport facilities.</p></div>
+          <div className="mt-12 bg-white rounded-xl border border-orange-100 p-6 flex flex-col md:flex-row justify-between gap-4 shadow-lg">
+            <div>
+              <h3 className="font-bold text-[#1C1C1C]">Ready to schedule a VIP Site visit?</h3>
+              <p className="text-xs text-gray-500">Book with transport facilities.</p>
+            </div>
             <div className="flex gap-3">
-              <button onClick={() => onOpenBooking()} className="px-6 py-2 rounded-full bg-[#F17300] text-white text-xs font-bold">Book Site Tour</button>
-              <button onClick={handleGeneralWhatsApp} className="px-6 py-2 rounded-full bg-[#25D366] text-white text-xs font-bold flex items-center gap-1"><WhatsAppIcon className="h-4 w-4" />WhatsApp</button>
+              <button onClick={() => onOpenBooking()} className="px-6 py-2 rounded-full bg-[#F17300] hover:bg-[#d66500] text-white text-xs font-bold transition-all">Book Site Tour</button>
+              <button onClick={handleGeneralWhatsApp} className="px-6 py-2 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white text-xs font-bold flex items-center gap-1 transition-all"><WhatsAppIcon className="h-4 w-4" />WhatsApp</button>
             </div>
           </div>
         </div>

@@ -6,7 +6,6 @@
 import { useState, useEffect } from 'react';
 import { Menu, X, Phone, Building2, CalendarRange } from 'lucide-react';
 import { COMPANY_INFO } from '../data';
-import LogoImage from '../assets/images/Logo of PSS.jpeg';
 
 interface HeaderProps {
   currentPage: string;
@@ -30,6 +29,25 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Header background logic:
+  // - All pages: transparent (no background) until scrolled
+  // - After scroll: white background with shadow on all pages
+  const showHeaderBg = isScrolled;
+  
+  // Logo color logic:
+  // - Always orange on all pages (both home and other pages)
+  const logoSVGColor = 'text-[#FA8C17]';
+  
+  // Menu text color logic:
+  // - When scrolled or on non-home pages with white background: dark gray text
+  // - When transparent background: white text
+  const menuTextColor = showHeaderBg ? 'text-gray-700' : 'text-white';
+  
+  // Mobile menu button color:
+  // - When scrolled or on non-home pages with white background: dark gray
+  // - When transparent background: white
+  const mobileMenuColor = showHeaderBg ? 'text-gray-700' : 'text-white';
 
   const menuItems = [
     { id: 'home', label: 'Home' },
@@ -60,7 +78,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
     <header
       id="main-app-header"
       className={`fixed top-0 w-full transition-all duration-300 z-50 ${
-        isScrolled
+        showHeaderBg
           ? 'bg-white shadow-lg border-b border-gray-100 py-3'
           : 'bg-transparent py-5'
       }`}
@@ -68,20 +86,60 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
-          {/* Logo Image Only - No Text */}
+          {/* SVG Logo Directly Embedded - Always Orange */}
           <div
             onClick={handleLogoClick}
             id="logo-brand-btn"
             className="flex items-center cursor-pointer select-none group"
           >
-            <div className={`flex items-center justify-center h-12 w-auto transition-all group-hover:scale-105 overflow-hidden ${
-              isScrolled ? 'bg-transparent' : 'bg-transparent'
+            <div className={`flex items-center justify-center transition-all group-hover:scale-105 ${
+              showHeaderBg ? 'bg-transparent' : 'bg-transparent'
             }`}>
-              <img 
-                src={LogoImage} 
-                alt="PSS Real Estate Logo"
-                className="h-12 w-auto object-contain"
-              />
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                viewBox="0 0 680 120" 
+                className={`h-12 w-auto transition-all ${logoSVGColor}`}
+                fill="currentColor"
+              >
+                <defs>
+                  <mask id="window-mask-header">
+                    <rect width="100%" height="100%" fill="white" />
+                    <rect x="49" y="26" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="61" y="26" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="49" y="41" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="61" y="41" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="49" y="56" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="61" y="56" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="49" y="71" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="61" y="71" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="49" y="86" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="61" y="86" width="6" height="9" fill="black" rx="0.5" />
+                    <rect x="82" y="52" width="6" height="8" fill="black" rx="0.5" />
+                    <rect x="92" y="52" width="6" height="8" fill="black" rx="0.5" />
+                    <rect x="82" y="66" width="6" height="8" fill="black" rx="0.5" />
+                    <rect x="92" y="66" width="6" height="8" fill="black" rx="0.5" />
+                    <rect x="82" y="80" width="6" height="8" fill="black" rx="0.5" />
+                    <rect x="92" y="80" width="6" height="8" fill="black" rx="0.5" />
+                  </mask>
+                </defs>
+                <g>
+                  <path d="M38 32 v73 h-24 v-8 l6 -5 v-8 l-6 -5 v-8 l6 -5 v-8 l-6 -5 v-8 l6 -5 z" />
+                  <g mask="url(#window-mask-header)">
+                    <rect x="43" y="14" width="30" height="91" rx="1" />
+                    <rect x="77" y="42" width="25" height="63" rx="1" />
+                  </g>
+                  <text 
+                    x="120" 
+                    y="76" 
+                    fontFamily="'Outfit', 'Inter', system-ui, sans-serif" 
+                    fontWeight="700" 
+                    fontSize="43" 
+                    letterSpacing="0.01em"
+                  >
+                    PSS REAL ESTATE PVT. LTD.
+                  </text>
+                </g>
+              </svg>
             </div>
           </div>
 
@@ -95,9 +153,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
                 className={`px-4 py-2 text-xs font-bold uppercase tracking-widest rounded-md transition-all ${
                   currentPage === item.id
                     ? 'text-[#F17300] bg-orange-50/90 font-extrabold'
-                    : isScrolled 
-                      ? 'text-gray-600 hover:text-[#F17300] hover:bg-gray-50'
-                      : 'text-white/90 hover:text-white hover:bg-white/10'
+                    : `${menuTextColor} hover:text-[#F17300] hover:bg-white/10`
                 }`}
               >
                 {item.label}
@@ -131,11 +187,7 @@ export default function Header({ currentPage, setCurrentPage, onOpenBooking }: H
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               id="hamburg-menu-toggle-btn"
-              className={`p-2 rounded-md focus:outline-none transition-all ${
-                isScrolled 
-                  ? 'text-gray-600 hover:text-[#1C1C1C] hover:bg-gray-100' 
-                  : 'text-white hover:text-white hover:bg-white/10'
-              }`}
+              className={`p-2 rounded-md focus:outline-none transition-all ${mobileMenuColor} hover:text-[#F17300] hover:bg-white/10`}
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
